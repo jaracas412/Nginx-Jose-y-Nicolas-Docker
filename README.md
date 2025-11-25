@@ -96,7 +96,9 @@ se mostraba el index.html del repositorio clonado en la carpeta html/.
 3.2 Comprobar registros del servidor
 Para revisar los logs del contenedor y verificar su funcionamiento se ejecutó:
 
-docker logs nginx-jose-nico
+<img width="1248" height="227" alt="6" src="https://github.com/user-attachments/assets/bc1c349c-d20e-4457-b36f-39f2738b5a43" />
+
+
 Esto permite ver peticiones, accesos y posibles errores del servidor.
 
 3.3 Detener y eliminar contenedor
@@ -107,3 +109,8 @@ Si se desea hacer una limpieza completa incluyendo volúmenes:
 
 docker compose down --volumes
 Esto elimina los servicios, redes internas y volúmenes asociados al proyecto.
+
+
+## Autores
+Jose Manuel Aranda Castro
+Nicolas Cervera
