@@ -80,9 +80,15 @@ Para iniciar el contenedor en segundo plano se ejecutó:
 
 docker compose up -d
 
+<img width="1251" height="192" alt="Comprobación contenedor levantado" src="https://github.com/user-attachments/assets/00d5bde7-dc10-43cc-a8a1-986fed362fb1" />
+
+
 Una vez levantado, se comprobó en el navegador que el servidor respondía correctamente mediante:
 
 http://localhost
+
+<img width="1752" height="504" alt="Comprobación IP" src="https://github.com/user-attachments/assets/31f0428d-2f1b-46d3-891b-bc9991791fd0" />
+
 
 3.1 Editar archivo /etc/hosts
 Para asignar un nombre de dominio local, se modificó el archivo hosts.
@@ -92,6 +98,9 @@ En Windows: C:\Windows\System32\drivers\etc\hosts
 127.0.0.1   jose-nico.test
 Después de guardar los cambios, al acceder a: http://jose-nico.test
 se mostraba el index.html del repositorio clonado en la carpeta html/.
+
+<img width="1412" height="743" alt="Comprobacion Dominio" src="https://github.com/user-attachments/assets/95305a60-b8f1-474c-858c-eadd1dc6f99b" />
+
 
 3.2 Comprobar registros del servidor
 Para revisar los logs del contenedor y verificar su funcionamiento se ejecutó:
@@ -105,6 +114,11 @@ Esto permite ver peticiones, accesos y posibles errores del servidor.
 Para detener el contenedor:
 
 docker compose down
+
+
+<img width="1257" height="116" alt="Comprobación parar contenedor" src="https://github.com/user-attachments/assets/d80a69a3-9a8f-42b3-9747-168b769278ff" />
+
+
 Si se desea hacer una limpieza completa incluyendo volúmenes:
 
 docker compose down --volumes
@@ -112,5 +126,6 @@ Esto elimina los servicios, redes internas y volúmenes asociados al proyecto.
 
 
 ## Autores
-Jose Manuel Aranda Castro
-Nicolas Cervera
+
+| [<img src="https://avatars.githubusercontent.com/u/234394149?v=4" width="115"><br><sub>Jose Manuel Aranda</sub>](https://github.com/jaracas412) | [<img src="https://avatars.githubusercontent.com/u/234393987?s=400&v=4" width="115"><br><sub>Nicolás Cervera</sub>](https://github.com/ncerrod2606) |
+|:---:|:---:|
