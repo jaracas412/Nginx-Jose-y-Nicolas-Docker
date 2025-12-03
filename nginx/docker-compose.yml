@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./conf/jose-nico.test.conf:/etc/nginx/conf.d/jose-nico.test.conf
+      - ./conf/.htpasswd:/etc/nginx/conf/.htpasswd
+      - ./html:/usr/share/nginx/html
