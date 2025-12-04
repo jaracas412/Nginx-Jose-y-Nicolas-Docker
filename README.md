@@ -21,7 +21,8 @@ Antes de comenzar esta práctica es obligatorio:
 En primer lugar deberemos de descargar esta utilidad de OpenSSL para generar contraseñas: 
 
 docker pull stakater/ssl-certs-generator
-Haber configurado la estructura de carpetas:
+
+<img width="984" height="256" alt="2 docker pull stakater" src="https://github.com/user-attachments/assets/1f7d2d88-c85a-4733-9821-aa43a36e2b44" />
 
 
 
@@ -48,59 +49,41 @@ docker run --rm stakater/ssl-certs-generator openssl passwd -apr1 'tupassword' >
 
 con este comando generearemos la contraseña.
 
+<img width="1237" height="95" alt="3 generar contraseña" src="https://github.com/user-attachments/assets/b36e549d-26af-4ceb-b339-834ac412e854" />
+
+
 Crearemos 2 usuarios, uno con mi nombre y otro con mi apellido y generaremos una contraseña para cada uno de ellos la cual aparecerá en formato encriptado.
 
-📸 AQUÍ PON LA CAPTURA DEL CONTENIDO DE TU FICHERO htpasswd
+<img width="461" height="115" alt="4 Contraseña en htpasswd" src="https://github.com/user-attachments/assets/647466f9-8bfb-4a81-bee9-7364e5165db9" />
+
 
 1.3 Configuración del contenedor Nginx con autenticación
 Configuración base del archivo jose-nico.test.conf:
 
 
-server {
-  listen 80;
-  listen [::]:80;
 
-  root /usr/share/nginx/html;
-  index index.html index.htm index.nginx-debian.html;
+<img width="665" height="386" alt="5 jose-nico test configuracion archivo" src="https://github.com/user-attachments/assets/de9f4acc-d58b-4951-81f9-63f233ecffd8" />
 
-  server_name jose-nico.test;
 
-  location / {
-    auth_basic "Área restringida";
-    auth_basic_user_file /etc/nginx/.htpasswd;
-    try_files $uri $uri/ =404;
-  }
-}
 
 
 Ahora ejecutaremos el contenedor:
 
+<img width="1144" height="200" alt="6 docker run ejecucion del comando" src="https://github.com/user-attachments/assets/81aa0663-afcc-4b35-a2b3-f7ed42d984b8" />
 
-docker run -d --name nginx-jose-nico \
-  -p 8080:80 \
-  -v ./nginx/conf/jose-nico.test.conf:/etc/nginx/conf.d/default.conf \
-  -v ./nginx/conf/htpasswd:/etc/nginx/.htpasswd \
-  -v ./nginx/html:/usr/share/nginx/html \
-  nginx
 
-📸 AQUÍ PON CAPTURA DEMOSTRANDO QUE TE PIDE USUARIO Y CONTRASEÑA
+Nos iremos al navegador a jose-nico.test:8080 y comprobaremos que para entrar a nuestro dominio deberemos de ser autenticados.
+
+<img width="1135" height="376" alt="7 autentificacion en dominio" src="https://github.com/user-attachments/assets/c6443f8b-b0d8-4ecd-8727-476b3aac6271" />
+<img width="1902" height="1034" alt="7 2 Verificación de entrada" src="https://github.com/user-attachments/assets/f0e0e5a0-5bec-4e8f-bc2e-91005c8c8fc0" />
 
 1.4 Probando la autenticación
 Si pulsas Cancelar en la ventana de autenticación, Nginx responde con un:
 
 401 Unauthorized
 
-📸 AQUÍ PON CAPTURA DEL ERROR 401
 
-2. Tarea 1 — Intento fallido + intento correcto
-Debías probar:
-
-Un intento con usuario incorrecto
-
-Un intento con usuario válido
-
-Revisar logs internos
-FOTO DE LOGS SESIONES
+<img width="1184" height="199" alt="8 Error Cancel" src="https://github.com/user-attachments/assets/7a87e516-1571-4ab8-bc8e-a308abea19f8" />
 
 2.2 Autenticar solo contact.html
 Modificación a nuestro archivo de configuración:
@@ -114,13 +97,18 @@ location = /contact.html {
     auth_basic_user_file /etc/nginx/.htpasswd;
 }
 
-📸 AQUÍ PON CAPTURA AL ACCEDER A contact.html MOSTRANDO LA AUTENTICACIÓN
+<img width="450" height="188" alt="9 restriccion a contact" src="https://github.com/user-attachments/assets/df8e3e21-2a3a-447e-b275-beb4b1b67f92" />
+
 
 2.3 Combinación: Autenticación + restricción por IP
 Nginx permite dos modos:
 
 satisfy any	IP válida o usuario válido
 satisfy all	IP válida y usuario válido (ambas cosas)
+
+<img width="264" height="146" alt="10 Restriccion IP" src="https://github.com/user-attachments/assets/84238847-932a-4581-a66a-f2491f872355" />
+<img width="433" height="187" alt="10 1 Restricción IP" src="https://github.com/user-attachments/assets/52e409e7-6528-45ed-99df-196060748b3c" />
+
 
 3. Tarea 1 — Bloquear acceso desde tu IP al directorio raíz
 Deberemos de identificar en primer lugar la IP que esta identificando el contenedor como acceso, en mi caso es ->
@@ -133,38 +121,26 @@ location / {
     deny 172.17.0.1;
     allow all;
 }
+<img width="215" height="94" alt="11 restriccion a mi ip" src="https://github.com/user-attachments/assets/cc7cc03e-2706-467f-9e1e-2a0121d9e32e" />
 
 
 Resultado esperado:
 
+<img width="1122" height="226" alt="12 restriccion de mi IP a la pagina" src="https://github.com/user-attachments/assets/7de0530d-f022-4e8e-8735-09fe1515c2e3" />
 
-📸 AQUÍ CAPTURA DEL 403 EN EL NAVEGADOR
 
-Logs:
 
 
 3.2 Tarea 2 — IP válida + usuario válido
 Configuración final:
-
-location / {
-        satisfy all;
-
-        allow 172.17.0.1;
-        deny all;
-
-        auth_basic "Zona protegida";
-        auth_basic_user_file /etc/nginx/.htpasswd;
-
-        try_files $uri $uri/ =404;
-    }
-
+<img width="425" height="221" alt="13 tarea 2" src="https://github.com/user-attachments/assets/dd3d5424-ecef-4337-861d-e272eb527abb" />
 
 Resultado esperado:
 
 Solo puedes entrar si:
 (1) Tienes esa IP y (2) introduces un usuario correcto
 
-📸 AQUÍ PON LA CAPTURA DE ACCESO EXITOSO
+<img width="1919" height="635" alt="15 acceso exitoso" src="https://github.com/user-attachments/assets/018f840a-47c6-4826-963a-b0a292c0d681" />
 
 ## Autores
 
