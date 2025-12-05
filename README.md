@@ -101,9 +101,6 @@ Finalmente comprobamos el funcionamiento accediendo a:
 
 https://jose-nico.test:8080
 
-yaml
-Copiar código
-
 <img width="1918" height="596" alt="8 Verificación de que funciona" src="https://github.com/user-attachments/assets/f199415b-8407-46f2-9278-46762cc16bf7" />
 
 ---
