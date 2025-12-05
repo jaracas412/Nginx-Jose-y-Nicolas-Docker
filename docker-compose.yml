@@ -1,0 +1,11 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf/jose-nico.test.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/certs/cert.pem:/etc/ssl/certs/cert.pem:ro
+      - ./nginx/certs/key.pem:/etc/ssl/private/key.pem:ro
+      - ./nginx/html:/var/www/jose-nico.test/html
